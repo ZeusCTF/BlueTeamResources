@@ -1,3 +1,4 @@
+
 Basic information:
 
 The structure on any given Windows system contains the following root keys:
@@ -33,4 +34,50 @@ If you write keys to a key under HKEY_CLASSES_ROOT, the system stores the inform
 If you write values to a key under HKEY_CLASSES_ROOT, and the key already exists under HKEY_CURRENT_USER\Software\Classes, the system will store the information there instead of under HKEY_LOCAL_MACHINE\Software\Classes.
 
 HKEY_CURRENT_CONFIG 	Contains information about the hardware profile that is used by the local computer at system startup.
+
+The majority of the hives can be found at these locations on the disk as well:
+C:\Windows\System32\Config
+C:\Users\*user*\AppData\Local\Microsoft\Windows
+
+To note, in addition to these hives, there are user-specific hives that reside in a user's directory (typically C:\Users\*user*).
+These files are NTUSER.DAT and USRCLASS.DAT
+
+(Also, this hive file could be important to check, as it contains info regarding recently run programs: :\Windows\AppCompat\Programs\Amcache.hve)
+
+Another note, each location representing a registry hive will also have a .log (possibly more than one) file to denote transactions that will occur in the future, but that haven't been commited to the hive yet.
+Similarly, a backup of the registry hives can be found at the below directory:
+C:\Windows\System32\Config\RegBack
+
+Another useful key, depending on how the drive was obtained, would be the:
+SOFTWARE\Microsoft\Windows NT\CurrentVersion
+Which displays the OS version, useful for if that information is not provided at the beginning
+
+For investigating system startup, attention should be given to the machine's Control Sets.  Typically there are two control sets, "ControlSet001 and ControlSet002" located in the system hive.
+Generally, ControlSet001 is the control set the machine booted with, while ControlSet002 is the "last known good" configuration.
+
+A volitile control set is created while the machine is live, known as the CurrentControlSet, and located at "HKLM\SYSTEM\CurrentControlSet".
+This will most likely be the most accurate source of system information.
+Though we can confirm the current control set in use by navigating to "SYSTEM\Select\Current"
+
+Some basic hives that contain system information include:
+SYSTEM\CurrentControlSet\Control\ComputerName\ComputerName - Computer Name
+SYSTEM\CurrentControlSet\Control\TimeZoneInformation - Time Zone Info
+SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces - Network Interfaces
+
+For Autorun applications, check these locations:
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Run
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\RunOnce
+SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
+SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer\Run
+SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+
+This key has information regarding services:
+SYSTEM\CurrentControlSet\Services
+
+While this key has user account information:
+SAM\Domains\Account\Users
+
+This location can be used to find recently opened documents:
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
+
 
