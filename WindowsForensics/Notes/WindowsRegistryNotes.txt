@@ -80,4 +80,50 @@ SAM\Domains\Account\Users
 This location can be used to find recently opened documents:
 NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
 
+Shellbags are another method of determining if files/folders were opened or not, and can be critical in proving the respective file/folder was accessed.
+These can exist in any of the below locations:
+USRCLASS.DAT\Local Settings\Software\Microsoft\Windows\Shell\Bags
+USRCLASS.DAT\Local Settings\Software\Microsoft\Windows\Shell\BagMRU
+NTUSER.DAT\Software\Microsoft\Windows\Shell\BagMRU
+NTUSER.DAT\Software\Microsoft\Windows\Shell\Bags
 
+*though you will likely need to use another tool to view these
+
+When you save a new file on a Windows system, you will be prompted to select a location you want to save it at.
+However, if you open an existing file, Windows remembers where you save it, and therefore does not prompt you again.
+Windows "remembers" where to save files by using information in the following locations:
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePIDlMRU
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRU
+
+Another somewhat similar method of tracking recent user activity is by looking at the below keys, which refer to recent Windows searches performed:
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\WordWheelQuery
+
+Windows keeps track of the applications launched by a user in the below key (does not track programs started via cmdline):
+NTUSER.DAT\Software\Microsoft\Windows\Currentversion\Explorer\UserAssist\{GUID}\Count
+
+Similarly, this location is used to track applications launched on the machine - with the main intention being to ensure backwards compatibility of applications:
+SYSTEM\CurrentControlSet\Control\Session Manager\AppCompatCache
+*another tool will probably be needed to parse this
+
+The AmCache hive is related to the above, and performs a similar function.  It can be found here:
+Amcache.hve\Root\File\{Volume GUID}\
+C:\Windows\appcompat\Programs\Amcache.hve
+
+"Background Activity Monitor" tracks background activity of applications, while "Desktop Activity Moderator" tracks power consumption of the device.
+Both can be found at their respective locations:
+SYSTEM\CurrentControlSet\Services\bam\UserSettings\{SID}
+SYSTEM\CurrentControlSet\Services\dam\UserSettings\{SID}
+
+The below keys keep track of all USB devices plugged into a system:
+SYSTEM\CurrentControlSet\Enum\USBSTOR
+SYSTEM\CurrentControlSet\Enum\USB
+
+This key is important as it tracks the times when the device was first connected, last connected, and removed.
+SYSTEM\CurrentControlSet\Enum\USBSTOR\Ven_Prod_Version\USBSerial#\Properties\{83da6326-97a6-4088-9453-a19231573b29}\xxx
+0064 - First Connection
+0066 - Last Connection
+0067 - Last removal
+
+The name of a connected drive can be found here:
+SOFTWARE\Microsoft\Windows Portable Devices\Devices
