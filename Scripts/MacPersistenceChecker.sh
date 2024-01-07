@@ -14,3 +14,21 @@ crontab -l
 echo "Checking for periodic scripts"
 ls ls /etc/periodic/*
 #Note: this is not commonly used for malware
+
+echo "Collection of .plist files"
+ls -la /Library/Preferences
+
+echo "Dynamic libraries:"
+la -la ~/lib
+ls -la /usr/local/lib
+ls -la /usr/lib
+
+echo ""
+echo "Does a custom library path exist?"
+echo ""
+
+if env | grep -q "LD_LIBRARY_PATH"; then
+  echo "LD_LIBRARY_PATH variable is present"
+else
+  echo "LD_LIBRARY_PATH variable is not present"
+fi
