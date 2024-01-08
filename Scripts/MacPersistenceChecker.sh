@@ -18,6 +18,10 @@ ls ls /etc/periodic/*
 echo "Collection of .plist files"
 ls -la /Library/Preferences
 
+echo "Any dangerous strings/settings detected?"
+echo "Searching for the RunAtLoad key"
+grep -R RunAtLoad .
+
 echo "Dynamic libraries:"
 la -la ~/lib
 ls -la /usr/local/lib
@@ -32,3 +36,4 @@ if env | grep -q "LD_LIBRARY_PATH"; then
 else
   echo "LD_LIBRARY_PATH variable is not present"
 fi
+
