@@ -20,7 +20,7 @@ ls -la /Library/Preferences
 
 echo "Any dangerous strings/settings detected?"
 echo "Searching for the RunAtLoad key"
-grep -R RunAtLoad .
+grep -R RunAtLoad /Library/Preferences
 
 echo "Dynamic libraries:"
 la -la ~/lib
@@ -35,5 +35,17 @@ if env | grep -q "LD_LIBRARY_PATH"; then
   echo "LD_LIBRARY_PATH variable is present"
 else
   echo "LD_LIBRARY_PATH variable is not present"
+fi
+
+echo "Checking for the existance of shell startup scripts"
+directory_path="/Users"
+# Check if the path exists
+if [ -d "$directory_path" ]; then
+    for folder in "$directory_path"/*; do
+            echo "Folder: $folder"
+            ls $folder/.zshrc
+            ls $folder/.bashrc
+
+    done
 fi
 
