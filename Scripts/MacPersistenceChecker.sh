@@ -45,7 +45,16 @@ if [ -d "$directory_path" ]; then
             echo "Folder: $folder"
             ls $folder/.zshrc
             ls $folder/.bashrc
-
     done
+fi
+
+echo "Checking for the existance of custom preference panes"
+if [ -d "$directory_path" ]; then
+    for folder in "$directory_path"/*; do
+            echo "Folder: $folder/Library/PreferencePanes"
+            ls -la $folder/Library/PreferencePanes
+    done
+    echo "Are there any preference panes installed for all users?"
+    ls -la /Library/PreferencePanes
 fi
 
