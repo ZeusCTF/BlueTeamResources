@@ -58,3 +58,9 @@ if [ -d "$directory_path" ]; then
     ls -la /Library/PreferencePanes
 fi
 
+echo "Has a malicious startup command been added to the terminal?"
+  if [ -d "$directory_path" ]; then
+    for folder in "$directory_path"/*; do
+            plutil -p $folder/Library/Preferences/com.apple.Terminal.plist | grep "CommandString"
+    done
+fi
