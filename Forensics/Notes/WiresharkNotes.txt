@@ -1,0 +1,11 @@
+Each time you select a packet within the Wireshark GUI interface, two panes are populated - the "Packet Details" pane, and a "Packet Bytes" pane.
+Hovering your mouse of information in the packet details pane will cause the corresponding section in the packet bytes pane to become highlighted.
+
+For any given packet, there will be a similar number of layers included in the packet details pane.
+These are generally:
+Frame (layer 1)
+Ethernet (layer 2)
+Source IP (layer 3)
+Protocol (layer 4)
+Application (layer 5)
+
