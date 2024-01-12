@@ -60,7 +60,14 @@ fi
 
 echo "Has a malicious startup command been added to the terminal?"
   if [ -d "$directory_path" ]; then
+    echo "Checking $folder/Library/Preferences/com.apple.Terminal.plist"
     for folder in "$directory_path"/*; do
             plutil -p $folder/Library/Preferences/com.apple.Terminal.plist | grep "CommandString"
     done
 fi
+
+uuid=$(ioreg -rd1 -c IOPlatformExpertDevice | awk -F'"' '/IOPlatformUUID/{print $4}')
+echo "Device UUID: $uuid"
+echo "Checking for startup apps:"
+plutil -p ~/Library/Preferences/ByHost/com.apple.loginwindow.$uuid.plist
+
