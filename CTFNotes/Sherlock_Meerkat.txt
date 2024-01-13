@@ -1,0 +1,18 @@
+First thing I did was open the associated .json file as it will likely be the easiest to go through (but my initial assumption is that it won't be too useful).  The output was all in a block, so I copied the file, and "pretty printed" it into a new one.
+
+For 1-3, you can answer them using a combonation of information from the pcap and json file.  The CMS/CVE can be found resonably quickly through the json file, while the attack type can be deduced from the HTTP packets in the pcap (if you notice the /bonita path in the pcap, you could probably figure out the CMS as well...)
+
+To determine the string appended, I just looked through the HTTP packets, and found a few with `i18ntranslation` appended.
+
+for question 5, I probably did this in an inefficient way, I piped the output of the pcap to look for 'username' as that was a field in the http POST requests, then I removed any duplicates, and sent it to `wc -l`
+
+If you look at the POST requests, you can see the attacker use the seb.broom account during a bruteforce attempt, which then carries on with subsequent HTTP requests - thus we can safely assume that this means the attackers bruteforce succeeded.  This account is the answer to question 6.
+
+For question 7, if you continue to analyze the HTTP stream, you eventually come across the attacker exploiting the server - which leads to them seemingly issuing commands through the use of downloading text and executing it.  The text is downloaded from pastes.io - which is the answer to 7.
+
+(funnily enough the tasks on the HTB challenge, at least at time of writing, jump from 7 to 9, 8 has been completely removed)
+
+Both questions 9/10 can be answered from pretty much the same information as 7.  With the file name being contained in the pastes link, and the persistence mechanism being the file the text information was sent to.
+
+For the final question, locating the MITRE technique ID is pretty straightforward, just looking through their site will lead you to the correct spot.
+
