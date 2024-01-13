@@ -71,3 +71,9 @@ echo "Device UUID: $uuid"
 echo "Checking for startup apps:"
 plutil -p ~/Library/Preferences/ByHost/com.apple.loginwindow.$uuid.plist
 
+echo "Checking for the existence of emond rules"
+ls -la /etc/emond.d/rules/
+
+echo "Do any folder action scripts exist?"
+ls -a /Library/Scripts/Folder\ Action\ Scripts/
+
