@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#Just a quick script written to check a few methods of persistence that are used on Macs.
+#Note that this script does not show all of the various methods, and should mainly be used as a tool to determine where further investigative efforts should be spent.
+
+
 #Checking Launch Agents
 echo "Checking the contents of /Library/LaunchAgents and /Library/LaunchDaemons."
 ls -la /Library/Launch*
