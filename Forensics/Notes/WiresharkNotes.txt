@@ -7,5 +7,35 @@ Frame (layer 1)
 Ethernet (layer 2)
 Source IP (layer 3)
 Protocol (layer 4)
-Application (layer 5)
+Application (layer 5) - some packets may omit this layer, generally speaking packets without an application protocol like http listed in the protocol tab will NOT have this layer.
 
+Wireshark has a unique number given to each packet, and you can search for specific packets by navigating to the Go > Got to Packet option (or ctrl+g)
+
+You can search for packets using the Edit > Find method, with various searching functionality (though the most common is either string searches or regex)
+
+Another helpful tip is that packets can be marked by right-clicking them and selecting mark (or unmark to undo).  Note: these marks do not persist sessions
+
+You can also add a comment to a packet by selecting a packet, then from the Edit tab, choosing the "Packet Comment" dropdown item
+
+Packets can be exported through the File tab menu.
+You can even export files transferred over the wire through the File > Export Objects menu
+
+View > Time Display Format can be used to alter the displayed time for each packet
+
+Some useful filters (cheat sheet):
+
+ip.src != *ip* or *CIDR range* -> filters out an IP
+!(dns or arp or udp) -> filters out dns, arp, udp, but can be used to filter any protocol
+http.request -> lists http packets
+tcp.dstport == ** -> lists packets going to a specified tcp port
+tcp.srcport == ** -> lists packets with the specified source port
+
+as can be seen in the above examples, wireshark uses logical operators, however they actually support two different types:
+eq and == are equiv
+ne or != are equiv
+gt or > are equiv
+lt or < are equiv
+and or && are equiv
+or and || are equiv
+xor and ^^ are equiv
+not or ! are equiv
