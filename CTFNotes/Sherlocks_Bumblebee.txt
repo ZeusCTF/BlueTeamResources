@@ -1,0 +1,5 @@
+I installed sqlitebrowser and opened phpbb.sqlite3, looking through the users (specifically the phpbb_users) table, we can look at the user_ip section, and use the username associated with a public IP.
+
+The IP here also answers the second question
+
+For the third question, the answer can be found in the phpbb_posts, just find the poster_ip from the last question and then look at the post_ip colummn
