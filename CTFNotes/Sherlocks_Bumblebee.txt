@@ -3,3 +3,5 @@ I installed sqlitebrowser and opened phpbb.sqlite3, looking through the users (s
 The IP here also answers the second question
 
 For the third question, the answer can be found in the phpbb_posts, just find the poster_ip from the last question and then look at the post_ip colummn
+
+For the fourth question, in the posts table, there is a post that contains an update.php link, that is not referenced in the access.log.  This is the answer
