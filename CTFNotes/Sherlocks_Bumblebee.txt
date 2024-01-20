@@ -5,3 +5,6 @@ The IP here also answers the second question
 For the third question, the answer can be found in the phpbb_posts, just find the poster_ip from the last question and then look at the post_ip colummn
 
 For the fourth question, in the posts table, there is a post that contains an update.php link, that is not referenced in the access.log.  This is the answer
+
+Task 5 was a bit annoying, if only due to the submission of the answer.  Essentially we are tasked with looking for the intiail login attempt as the administrator by a contractor.  There is a table for login attempts, however in this case it was empty.  Searching through other tables didn't really help either, nothing was relevant to the question at hand.  Going through the access.log, I first used grep to look for 'login' assuming that would be the page, however nothing stood out to me.  If you use grep to look for 'admin', you do see some pages that look more aligned with what is expected - /adm/style/admin.js?assets_version=4.  Putting two and two together, you can assume that this styling is only available to admins.  Then you can copy the first log time (not necessarily in order), then convert it to match the expected format for the question.
+
