@@ -21,9 +21,8 @@ def view(path):
     with open(path, 'rb') as fp:
         # Load the plist data, and print it in a more readable format
         data = plistlib.load(fp)
-        for k,v in data.items():
-            print(k,v)
-        fp.close()
+        for k, v in data.items():
+            print(k, v)
 
 def edit(path):
     # Open the plist file
@@ -33,10 +32,10 @@ def edit(path):
         value = input('Enter the associated value: ')
         # Make changes to the plist data
         data[key] = value
-        with open(xml_plist_path, 'wb') as fp:
+        with open(path, 'wb') as fp:
             plistlib.dump(data, fp)
-            fp.close()
 
+#searches for a specific key's value
 def search(path):
     with open(path, 'rb') as fp:
         data = plistlib.load(fp)
@@ -44,7 +43,6 @@ def search(path):
         print()
         print('Below is the associated value:')
         print(data[key])
-
 
 def main():
     # Grab file path
@@ -57,9 +55,21 @@ def main():
     print('Enter 1 to view the entire plist file.')
     print('Enter 2 to add information or update the plist file.')
     print('Enter 3 to search for a specific key in the plist file.')
+    print('Enter 4 to provide a new file to modify.')
     print('Enter q to quit.')
-    while True:
-        decision = input('')
-        if decision == 1:
+
+    decision = input('')
+
+    while decision != 'q':
+        if decision == '1':
             view(path)
+        elif decision == '2':
+            edit(path)
+        elif decision == '3':
+            search(path)
+        elif decision == '4':
+            print('Please enter the new path:')
+            path = input()
+        decision = input('What would you like to do next? (Enter q to quit) ')
+
 main()
