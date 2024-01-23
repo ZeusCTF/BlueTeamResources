@@ -11,3 +11,9 @@ Task 5 was a bit annoying, if only due to the submission of the answer.  Essenti
 The answer to Task 6 can again be found in the database.  The password is contained in the phpbb_config table, which I had actually found while looking for the answers to Tasks 4/5
 
 For task 7, we can use the phpbb_users table to locate the user_ip of the admin user, then grep for the user agent associated with this ip.
+
+For task 8, if you just use a similar technique to grep for the word 'group' we can find a post request and use that timestamp as the answer.  (same formatting as task 5)
+
+Task 9 is solved again with the same technique.  You just have to grep for 'sql'
+
+For task 10 we can use the same request, then answer is just the byte size
