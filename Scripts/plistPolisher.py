@@ -43,6 +43,26 @@ def search(path):
         print()
         print('Below is the associated value:')
         print(data[key])
+def convert(path):
+    import subprocess
+    print('Which format do you wish to convert the file to?: ')
+    print('[1] for xml')
+    print('[2] for binary')
+    print('[3] for json')
+    format = input()
+    while format:
+        if format == '1':
+            subprocess.run(["plutil", "-convert", "xml1", path])
+            break
+        elif format == '2':
+            subprocess.run(["plutil", "-convert", "binary1", path])
+            break
+        elif format == '3': 
+            subprocess.run(["plutil", "-convert", "json", path])
+            break
+        else:
+            print('Invalid option, please re-enter a valid operation.')
+            format = input()
 
 def main():
     # Grab file path
@@ -51,11 +71,20 @@ def main():
     args = parser.parse_args()
     path = args.file
 
+#    try:
+#        with open(path, 'rb') as fp:
+#            plist_data = plistlib.load(fp)
+#        print(f'{path} is a valid plist file.')
+#    except plistlib.InvalidFileException:
+#        print(f'{path} is not a valid plist file.')
+
+
     print('What would you like to do:')
     print('Enter 1 to view the entire plist file.')
     print('Enter 2 to add information or update the plist file.')
     print('Enter 3 to search for a specific key in the plist file.')
-    print('Enter 4 to provide a new file to modify.')
+    print('Enter 4 to convert the plist file into a different format.')
+    print('Enter 5 to provide a new file to modify.')
     print('Enter q to quit.')
 
     decision = input('')
@@ -68,8 +97,16 @@ def main():
         elif decision == '3':
             search(path)
         elif decision == '4':
+            convert(path)
+        elif decision == '5':
             print('Please enter the new path:')
             path = input()
+        print('Enter 1 to view the entire plist file.')
+        print('Enter 2 to add information or update the plist file.')
+        print('Enter 3 to search for a specific key in the plist file.')
+        print('Enter 4 to convert the plist file into a different format.')
+        print('Enter 5 to provide a new file to modify.')
+        print('Enter q to quit.')
         decision = input('What would you like to do next? (Enter q to quit) ')
 
 main()
