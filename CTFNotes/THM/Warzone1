@@ -1,0 +1,11 @@
+1.) What was the alert signature for Malware Command and Control Activity Detected?:
+A) This can be determined by first finding the appropriate category, then just copying the signature.
+
+2.) What is the source IP address? Enter your answer in a defanged format.
+A) This is relatively easy again, using the same event, just copy the src_ip into cyberchef to "defang" it.  Which is essentially the process of making it unusable in case someone were to accidentally click it.
+
+3.) What IP address was the destination IP in the alert? Enter your answer in a defanged format.
+A) Basically the same question as 3, just using the dest_ip
+
+4.) Inspect the IP address in VirsusTotal. Under Relations > Passive DNS Replication, which domain has the most detections? Enter your answer in a defanged format. 
+A) Pretty much tells you what to do, navigate to the VT site > search tab > search dest IP > look under the passive replication section
