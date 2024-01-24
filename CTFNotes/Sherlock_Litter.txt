@@ -1,0 +1,7 @@
+Task 1: At a glance, what protocol seems to be suspect in this attack?
+Just judging based on the pcap, and the packets tracked, it looks like DNS is suspected
+
+Task 2: There seems to be a lot of traffic between our host and another, what is the IP address of the suspect host?
+If you sort the pcap, there's a few addresses that look pretty common, but the answer would be the most prevelant
+
+Task 3: What is the first command the attacker sends to the client?
