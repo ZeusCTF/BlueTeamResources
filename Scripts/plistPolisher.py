@@ -14,8 +14,6 @@ With both of the forms above being vaild, binary is just more efficient on disk.
 import argparse
 import plistlib
 
-xml_plist_path = '/Users/barryallen/Test/org.virtualbox.app.VirtualBox.plist1'
-
 def view(path):
     # Open the plist file
     with open(path, 'rb') as fp:
@@ -43,6 +41,8 @@ def search(path):
         print()
         print('Below is the associated value:')
         print(data[key])
+
+#function for converting a plist file into a specified format
 def convert(path):
     import subprocess
     print('Which format do you wish to convert the file to?: ')
@@ -70,13 +70,17 @@ def main():
     parser.add_argument('file', type=str, help='Please provide the full path to the plist file')
     args = parser.parse_args()
     path = args.file
+    correct = 0
 
-#    try:
-#        with open(path, 'rb') as fp:
-#            plist_data = plistlib.load(fp)
-#        print(f'{path} is a valid plist file.')
-#    except plistlib.InvalidFileException:
-#        print(f'{path} is not a valid plist file.')
+    while correct == 0:
+        try:
+            with open(path, 'rb') as fp:
+                plist_data = plistlib.load(fp)
+            print(f'{path} is a valid plist file.')
+            correct = 1
+        except plistlib.InvalidFileException:
+            print(f'{path} is not a valid plist file.')
+            path = input('Please enter the full correct path to a .plist file: ')
 
 
     print('What would you like to do:')
