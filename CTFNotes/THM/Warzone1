@@ -12,3 +12,13 @@ A) Pretty much tells you what to do, navigate to the VT site > search tab > sear
 
 5.) Still in VirusTotal, under Community, what threat group is attributed to this IP address?
 This section is a bit odd, but the group is listed as TA505
+
+6.) What is the malware family?
+Again, not really an obvious answer, but the malware "family" is listed in the same section
+
+7.) Do a search in VirusTotal for the domain from question 4. What was the majority file type listed under Communicating Files?
+Search for the domain in VirusTotal > then check the "Relations" tab
+
+8.) Inspect the web traffic for the flagged IP address; what is the user-agent in the traffic?
+For this question, you just need to look at the wireshark traffic, and find the correct http traffic.  To make it easier, I filtered for HTTP packets, and the dst IP
+
