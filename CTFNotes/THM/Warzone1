@@ -20,5 +20,10 @@ Again, not really an obvious answer, but the malware "family" is listed in the s
 Search for the domain in VirusTotal > then check the "Relations" tab
 
 8.) Inspect the web traffic for the flagged IP address; what is the user-agent in the traffic?
-For this question, you just need to look at the wireshark traffic, and find the correct http traffic.  To make it easier, I filtered for HTTP packets, and the dst IP
+For this question, you just need to look at the wireshark traffic, and find the correct http traffic.  To make it easier, I filtered for HTTP packets along with the dst IP
 
+9.) Retrace the attack; there were multiple IP addresses associated with this attack. What were two other IP addresses? Enter the IP addressed defanged and in numerical order. (format: IPADDR,IPADDR)
+The answer to this is a combo of two ip addresses that get referenced at the beginning of the http logs in Brim, though it isn't super clear which pair they want...
+
+10.) What were the file names of the downloaded files? Enter the answer in the order to the IP addresses from the previous question. (format: file.xyz,file.xyz)
+Here, you want to use NetworkMiner to open the .pcap, then select the "files" tab.  There are going to be some useless files, but the two .msi files are the answer.
