@@ -27,3 +27,9 @@ The answer to this is a combo of two ip addresses that get referenced at the beg
 
 10.) What were the file names of the downloaded files? Enter the answer in the order to the IP addresses from the previous question. (format: file.xyz,file.xyz)
 Here, you want to use NetworkMiner to open the .pcap, then select the "files" tab.  There are going to be some useless files, but the two .msi files are the answer.
+
+11.) Inspect the traffic for the first downloaded file from the previous question. Two files will be saved to the same directory. What is the full file path of the directory and the name of the two files? (format: C:\path\file.xyz,C:\path\file.xyz)
+This question...  For some unknown reason you have to submit the file twice???  But the question doesn't really indicate that, so I had to look up a guide for this question just to input the correct format.  You can get the file location from Wireshark though.
+
+12.) Now do the same and inspect the traffic from the second downloaded file. Two files will be saved to the same directory. What is the full file path of the directory and the name of the two files? (format: C:\path\file.xyz,C:\path\file.xyz)
+Same process as number 11
