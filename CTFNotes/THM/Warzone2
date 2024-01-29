@@ -1,0 +1,10 @@
+1.) What was the alert signature for A Network Trojan was Detected?
+To find this information, you can run a search for the string 'Trojan' and just copy the signature of the corresponding event.
+
+2.) What was the alert signature for Potential Corporate Privacy Violation?
+Same process as the above, just change the search term.
+
+3.) What was the IP to trigger either alert? Enter your answer in a defanged format.
+Just copy the src IP from the above event, past it into CyberChef, and defang the IP
+
+4.) Provide the full URI for the malicious downloaded file. In your answer, defang the URI. 
