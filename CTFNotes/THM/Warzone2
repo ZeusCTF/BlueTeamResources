@@ -8,3 +8,7 @@ Same process as the above, just change the search term.
 Just copy the src IP from the above event, past it into CyberChef, and defang the IP
 
 4.) Provide the full URI for the malicious downloaded file. In your answer, defang the URI. 
+To answer this question, I used Wireshark and searched for the destination IP found in the above question, then inspected the HTTP packet and copied the hostname along with the path requested.
+
+5.) What is the name of the payload within the cab file?
+For this question, I exported the HTTP packet flow and created a hash of the .cab file, then searched this hash in VirusTotal and copied the corresponding name from the "Details" pane
