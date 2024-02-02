@@ -12,3 +12,9 @@ To answer this question, I used Wireshark and searched for the destination IP fo
 
 5.) What is the name of the payload within the cab file?
 For this question, I exported the HTTP packet flow and created a hash of the .cab file, then searched this hash in VirusTotal and copied the corresponding name from the "Details" pane
+
+6.) What is the user-agent associated with this network traffic?
+Using the same HTTP packet as before, the user agent associated with the traffic can be copy/pasted by expanding the HTTP section in WireShark.
+
+7.) What other domains do you see in the network traffic that are labelled as malicious by VirusTotal? Enter the domains defanged and in alphabetical order. (format: domain[.]zzz,domain[.]zzz)
+This question was a bit unclear as there are three domains (at least) that show up in VirusTotal as malicious.  However I was able to locate the two the question was looking for by luck on my first try.
