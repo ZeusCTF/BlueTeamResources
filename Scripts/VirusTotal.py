@@ -1,0 +1,1 @@
+# The idea here is to create a script that utilizes the VT api to determine if an IP address/file hash is suspect
