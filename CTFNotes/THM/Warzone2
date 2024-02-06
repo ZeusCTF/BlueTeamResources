@@ -18,3 +18,12 @@ Using the same HTTP packet as before, the user agent associated with the traffic
 
 7.) What other domains do you see in the network traffic that are labelled as malicious by VirusTotal? Enter the domains defanged and in alphabetical order. (format: domain[.]zzz,domain[.]zzz)
 This question was a bit unclear as there are three domains (at least) that show up in VirusTotal as malicious.  However I was able to locate the two the question was looking for by luck on my first try.
+
+8.) There are IP addresses flagged as Not Suspicious Traffic. What are the IP addresses? Enter your answer in numerical order and defanged. (format: IPADDR,IPADDR)
+Within Brim, I searched for traffic matching this description (not suspicious), then created a filter for this value.  With the resulting logs, we can use cyberchef to copy/past the defanged IPs for the answer.
+
+9.) For the first IP address flagged as Not Suspicious Traffic. According to VirusTotal, there are several domains associated with this one IP address that was flagged as malicious. What were the domains you spotted in the network traffic associated with this IP address? Enter your answer in a defanged format. Enter your answer in alphabetical order, in a defanged format. (format: domain[.]zzz,domain[.]zzz,etc)
+Similar to the above question, I noted the IP address then created a filter in Brim to search just for logs containing that IP.  Afterwards, I sorted the logs and copied all domains into CyberChef to defang, before entering the data into THM.
+
+10.) Now for the second IP marked as Not Suspicious Traffic. What was the domain you spotted in the network traffic associated with this IP address? Enter your answer in a defanged format. (format: domain[.]zzz)
+Pretty much a repeat of the above question, except there is only one domain to note
