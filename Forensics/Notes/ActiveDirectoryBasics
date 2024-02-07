@@ -1,0 +1,13 @@
+In general terms, a Windows domain is a collection of users and computers under the administration of a given entity.  The idea is to centralize common administrative tasks under an "Active Directory".
+A server that runs Active Directory services is known as a Domain Controller.  These services offered come with many benefits, namely:
+Centralised identity management, and an easier method of setting security policies across an organization.
+
+User objects in a domain are considered "security principles", meaning they can be assigned access rights over resources on the network (such as files/printers).
+Traditionally, users are accounts that an individual employee may access, though user accounts also include service accounts such as those necessary for database services.
+
+Machines are another type of object within Active Directory, with a machine object being created whenever a new computer joins the domain.
+Similar to user accounts, machines are considered "security principals" and are assigned an account just as any regular user.
+To note, this account is limited on the overall domain, but isi often the local administrator for the assigned computer.
+
+Security Groups are also considered security principals, and can be assigned privileges that are inherited by its members.
+For example, say a group is given read access to a folder, if Bob is made a member of that group, he will inherit the read permission given to the group.
