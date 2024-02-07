@@ -2,18 +2,19 @@ import vt
 #https://docs.virustotal.com/reference/scan-url
 import requests
 
-url = "https://www.virustotal.com/api/v3/urls"
+url = "https://www.virustotal.com/api/v3/urls/aHR0cHM6Ly93d3cuZXNwbi5jb20v"
 
-payload = { "url": "string" }
 headers = {
     "accept": "application/json",
-    "content-type": "application/x-www-form-urlencoded",
-    "x-apikey": "API KEY"
+    "x-apikey": ""
 }
 
-response = requests.post(url, data=payload, headers=headers)
+response = requests.get(url, headers=headers)
 
 print(response.text)
+print('*' * 50)
+last_analysis_stats = response.json(["data"]["attributes"]["last_analysis_stats"])
+
 
 
 """
