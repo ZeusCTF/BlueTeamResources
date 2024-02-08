@@ -1,19 +1,24 @@
 import vt
 #https://docs.virustotal.com/reference/scan-url
 import requests
+import json
+import base64
 
-url = "https://www.virustotal.com/api/v3/urls/aHR0cHM6Ly93d3cuZXNwbi5jb20v"
+def url_scan(url):
 
-headers = {
-    "accept": "application/json",
-    "x-apikey": ""
-}
+    #prepares the request per the api requirements
+    b64 = base64.b64encode(url.encode())
+    scan = f"https://www.virustotal.com/api/v3/urls/{b64.decode()}"
 
-response = requests.get(url, headers=headers)
+    headers = {
+        "accept": "application/json",
+        "x-apikey": ""
+    }
 
-print(response.text)
-print('*' * 50)
-last_analysis_stats = response.json(["data"]["attributes"]["last_analysis_stats"])
+    #loads the response data, and prints analysis information
+    response = requests.get(scan, headers=headers)
+    last_analysis_stats = json.loads(response.text)
+    print(last_analysis_stats["data"]["attributes"]["last_analysis_stats"])
 
 
 
