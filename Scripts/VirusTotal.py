@@ -3,6 +3,9 @@ import vt
 import requests
 import json
 import base64
+import hashlib
+
+key = ''
 
 def url_scan(url):
 
@@ -12,15 +15,30 @@ def url_scan(url):
 
     headers = {
         "accept": "application/json",
-        "x-apikey": ""
+        "x-apikey": key
     }
 
     #loads the response data, and prints analysis information
     response = requests.get(scan, headers=headers)
     last_analysis_stats = json.loads(response.text)
+    print(f"[*] Scanning URL {url}")
+    print("[*] Results:")
     print(last_analysis_stats["data"]["attributes"]["last_analysis_stats"])
 
+def file_report(file_hash):
 
+    url = f"https://www.virustotal.com/api/v3/files/{file_hash}"
+
+    headers = {
+        "accept": "application/json",
+        "x-apikey": key
+    }
+
+    response = requests.get(url, headers=headers)
+
+    print(response.text)
+
+file_report('f5dc19126ac0a7bb1b998d0a6df319e2')
 
 """
 #main decision tree
