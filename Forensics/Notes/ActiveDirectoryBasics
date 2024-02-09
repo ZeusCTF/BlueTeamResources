@@ -11,3 +11,25 @@ To note, this account is limited on the overall domain, but isi often the local 
 
 Security Groups are also considered security principals, and can be assigned privileges that are inherited by its members.
 For example, say a group is given read access to a folder, if Bob is made a member of that group, he will inherit the read permission given to the group.
+Worth noting, groups can have both users and machines as members, as well as other groups.
+
+Several groups are created by default in a domain, and can automatically granted to users.
+Some of these include:
+Domain Admins
+Server Operators
+Backup Operators
+Domain Users
+
+Organizational Units are container objects that allow you to classify users and machines.  These are mainly used to define sets of users.
+
+By default, Windows creates a few default containers:
+Builtin
+Computers
+Domain Controllers
+Users
+Managed Service Accounts
+
+The primary difference between OUs and Security Groups is that OUs are typically used for appplying policies to users and computers, with security groups being used more to grant permissions to resources.
+
+(When managing OUs, Windows has a built-in method of preventing OUs from being deleted, which can be turned off by navigating to the objects properties > Object > unchecking the "protect object from accidental deletion" category.
+
