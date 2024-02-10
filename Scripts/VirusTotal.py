@@ -3,13 +3,12 @@ import vt
 import requests
 import json
 import base64
-import hashlib
 
-key = ''
+key = '5a67195f10bcf4e90670fe7dab139ae2d0c358b57d8b92f32a9a42206f71a212'
 
 def url_scan(url):
 
-    #prepares the request per the api requirements
+    #Prepares the request per the api requirements
     b64 = base64.b64encode(url.encode())
     scan = f"https://www.virustotal.com/api/v3/urls/{b64.decode()}"
 
@@ -18,7 +17,7 @@ def url_scan(url):
         "x-apikey": key
     }
 
-    #loads the response data, and prints analysis information
+    #Loads the response data, and prints analysis information
     response = requests.get(scan, headers=headers)
     last_analysis_stats = json.loads(response.text)
     print(f"[*] Scanning URL {url}")
@@ -27,6 +26,7 @@ def url_scan(url):
 
 def file_report(file_hash):
 
+    #This section takes a file hash and checks it against the already existing VT database
     url = f"https://www.virustotal.com/api/v3/files/{file_hash}"
 
     headers = {
@@ -36,7 +36,30 @@ def file_report(file_hash):
 
     response = requests.get(url, headers=headers)
 
-    print(response.text)
+    #If the prior checks indicate the file wasn't already apart of the VT database, we can upload it with the below 
+    if "NotFound" in response.text:
+        print("Unique file detected!")
+        print('Please provide the full path to the designated file, an upload to the VirusTotal API will be attempted')
+        path = input("")
+
+        #build the file name to pass into the request per VT docs
+        file_name = ""
+        for char in path[::-1]:
+            if char != "/":
+                file_name += char
+            else:
+                print(f"Attempting to upload: {file_name}")
+                break
+            
+        url = "https://www.virustotal.com/api/v3/files"
+        files = { "file": (file_name, open(path, "rb")) }
+        headers = {"accept": "application/json"}
+
+        
+        response = requests.post(url, files=files, headers=headers)
+
+        print(response.text)
+
 
 file_report('f5dc19126ac0a7bb1b998d0a6df319e2')
 
