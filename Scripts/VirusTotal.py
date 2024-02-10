@@ -4,7 +4,7 @@ import requests
 import json
 import base64
 
-key = '5a67195f10bcf4e90670fe7dab139ae2d0c358b57d8b92f32a9a42206f71a212'
+key = ''
 
 def url_scan(url):
 
@@ -50,7 +50,7 @@ def file_report(file_hash):
             else:
                 print(f"Attempting to upload: {file_name}")
                 break
-            
+
         url = "https://www.virustotal.com/api/v3/files"
         files = { "file": (file_name, open(path, "rb")) }
         headers = {"accept": "application/json"}
