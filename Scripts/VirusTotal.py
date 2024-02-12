@@ -38,6 +38,9 @@ def file_report(file_hash):
 
     #If the prior checks indicate the file wasn't already apart of the VT database, we can upload it with the below 
     if "NotFound" in response.text:
+        upload_file()
+
+    def upload_file():
         print("Unique file detected!")
         print('Please provide the full path to the designated file, an upload to the VirusTotal API will be attempted')
         path = input("")
@@ -48,20 +51,27 @@ def file_report(file_hash):
             if char != "/":
                 file_name += char
             else:
-                print(f"Attempting to upload: {file_name}")
+                print(f"Attempting to upload: {file_name[::-1]}")
                 break
-
-        url = "https://www.virustotal.com/api/v3/files"
-        files = { "file": (file_name, open(path, "rb")) }
-        headers = {"accept": "application/json"}
-
         
-        response = requests.post(url, files=files, headers=headers)
+        try:
+            url = "https://www.virustotal.com/api/v3/files"
+            files = { "file": (file_name, open(path, "rb")) }
 
-        print(response.text)
+            
+            response = requests.post(url, files=files, headers=headers)
+            if "analysis" in response.text:
+                print("Upload completed")
+                url = f"https://www.virustotal.com/api/v3/files/{file_hash}"
+                response = requests.get(url, headers=headers)
+        except:
+            print("Upload failed, please use the main VirusTotal site to upload your file.")
 
+    else:
+           print(response.text)
 
-file_report('f5dc19126ac0a7bb1b998d0a6df319e2')
+file_report('eb0995f0c1d723cb174bdfc29a58b632')
+#/Users/barryallen/CodingProjects/BlueTeamResources/Scripts
 
 """
 #main decision tree
