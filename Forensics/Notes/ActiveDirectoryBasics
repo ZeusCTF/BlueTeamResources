@@ -37,7 +37,20 @@ By default, all machines that join a domain (except for domain controllers) will
 (Typically you will create OUs to further seperate these computers, such as a Servers group, Workstation group, and so forth.
 
 In order to actually apply different settings to an OU, Windows uses Group Policy Objects.  These are essentially policies aimed at either users or computers that can set a specific baseline for those accounts.
-To configure GPOs, you will use "Group Policy Management"
+To configure GPOs, you will typically use the "Group Policy Management" tool that is installed by default.
+
+The first step in creating a new GPO, is to create one under the "Group Policy Objects section, then you can link it to where the policies should be applied
+An important note is that an OU will by default be applied to the linked OU, and any sub-OUs under it.
+
+When examining a policy, the "Scope" tab shows where the GPO is linked in the AD domain.
+For more granular control, there is a similar setting here called "Security Filtering" that can allow OUs to only be applied to specific users/groups.
+
+The settings tab has the actual contents of the GPO, and lets us know what specific configurations it applies.
+
+GPOs are distributed across the network via a network share called "SYSVOL", which is stored on the DC.
+Users within the domain should have access to this share so they can sync their GPOs periodically.
+
+Any changes to GPOs can take awhile to sync, but you can force the sync with a "gpupdate /force"
 
 
 
