@@ -1,1 +1,1 @@
-this is a test file dude, I wonder what wacky md5 hash we will get
+this is a test file dude, I wonder what wacky md5 hash we will get.  Testing

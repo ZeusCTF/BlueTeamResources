@@ -24,23 +24,14 @@ def url_scan(url):
     print("[*] Results:")
     print(last_analysis_stats["data"]["attributes"]["last_analysis_stats"])
 
-def file_report(file_hash):
-
-    #This section takes a file hash and checks it against the already existing VT database
-    url = f"https://www.virustotal.com/api/v3/files/{file_hash}"
-
-    headers = {
+#attempt uploading a provided file
+def upload_file(file_hash):
+        
+        #setting headers
+        headers = {
         "accept": "application/json",
         "x-apikey": key
     }
-
-    response = requests.get(url, headers=headers)
-
-    #If the prior checks indicate the file wasn't already apart of the VT database, we can upload it with the below 
-    if "NotFound" in response.text:
-        upload_file()
-
-    def upload_file():
         print("Unique file detected!")
         print('Please provide the full path to the designated file, an upload to the VirusTotal API will be attempted')
         path = input("")
@@ -55,23 +46,40 @@ def file_report(file_hash):
                 break
         
         try:
+            #this uploads the file
             url = "https://www.virustotal.com/api/v3/files"
             files = { "file": (file_name, open(path, "rb")) }
-
-            
             response = requests.post(url, files=files, headers=headers)
+
             if "analysis" in response.text:
+                #if the upload is successfull, re-request 
                 print("Upload completed")
                 url = f"https://www.virustotal.com/api/v3/files/{file_hash}"
                 response = requests.get(url, headers=headers)
+                return response.text
         except:
-            print("Upload failed, please use the main VirusTotal site to upload your file.")
+            return print("Upload failed, please use the main VirusTotal site to upload your file.")
 
+def file_report(file_hash):
+
+    #This section takes a file hash and checks it against the already existing VT database
+    url = f"https://www.virustotal.com/api/v3/files/{file_hash}"
+
+    headers = {
+        "accept": "application/json",
+        "x-apikey": key
+    }
+
+    response = requests.get(url, headers=headers)
+
+    #If the prior checks indicate the file wasn't already apart of the VT database, we can upload it with the below
+    if "NotFound" in response.text:
+        print(upload_file(file_hash))
     else:
-           print(response.text)
+        print(response.text)
 
-file_report('eb0995f0c1d723cb174bdfc29a58b632')
-#/Users/barryallen/CodingProjects/BlueTeamResources/Scripts
+file_report('7e36aa2d724449ceda24ab9e3bb837dd')
+#/Users/barryallen/CodingProjects/BlueTeamResources/Scripts/test.txt
 
 """
 #main decision tree
