@@ -1,5 +1,5 @@
-import vt
 #https://docs.virustotal.com/reference/scan-url
+import vt
 import requests
 import json
 import base64
@@ -44,7 +44,6 @@ def upload_file(file_hash):
             else:
                 print(f"Attempting to upload: {file_name[::-1]}")
                 break
-        
         try:
             #this uploads the file
             url = "https://www.virustotal.com/api/v3/files"
@@ -70,16 +69,32 @@ def file_report(file_hash):
         "x-apikey": key
     }
 
+    print("[*] Generating report...")
     response = requests.get(url, headers=headers)
 
     #If the prior checks indicate the file wasn't already apart of the VT database, we can upload it with the below
     if "NotFound" in response.text:
         print(upload_file(file_hash))
     else:
-        print(response.text)
+        last_analysis_stats = json.loads(response.text)
+        print(f"[*] Results:")
+        print(last_analysis_stats["data"]["attributes"]["last_analysis_stats"])
 
-file_report('7e36aa2d724449ceda24ab9e3bb837dd')
-#/Users/barryallen/CodingProjects/BlueTeamResources/Scripts/test.txt
+def scan_ip(ip):
+    #create request URL
+    url = f"https://www.virustotal.com/api/v3/ip_addresses/{ip}"
+    headers = {
+        "accept": "application/json",
+        "x-apikey": key
+    }
+
+    response = requests.get(url, headers=headers)
+    print(f"[*] Results:")
+    json_resp = json.loads(response.text)
+    print(json_resp["data"]["attributes"]["last_analysis_stats"])
+    print(json_resp["data"]["attributes"]["whois"])
+
+scan_ip("52.173.83.49")
 
 """
 #main decision tree
@@ -101,9 +116,9 @@ def main():
         elif decision == '3':
             search(path)
 
-        print('Enter 1 to view the entire plist file.')
-        print('Enter 2 to add information or update the plist file.')
-        print('Enter 3 to search for a specific key in the plist file.')
+        print('Enter 1 to scan a URL')
+        print('Enter 2 to lookup an IP address')
+        print('Enter 3 to search a file hash.')
         print('Enter q to quit.')
         decision = input('What would you like to do next? (Enter q to quit) ')
 
