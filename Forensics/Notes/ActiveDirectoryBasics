@@ -52,5 +52,17 @@ Users within the domain should have access to this share so they can sync their 
 
 Any changes to GPOs can take awhile to sync, but you can force the sync with a "gpupdate /force"
 
+When using Windows domains, all credentials are stored in the Domain Controllers.
+In order to authenticate to a service using domain credentials, two protocols are typically used.
+1) Kerberos - Used by recent versions of Windows, typically the default protocol.
+2) NetNTLM - Legacy protocol used mainly for compatibility.
+
+Kerberos will assign authenticated users "tickets", which the users can then present to services to demonstarate they are authenticated.
+
+When Kerberos is used for authentication, the following happens:
+
+
+
+
 
 
