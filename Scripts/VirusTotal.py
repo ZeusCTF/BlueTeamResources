@@ -1,10 +1,9 @@
 #https://docs.virustotal.com/reference/scan-url
-import vt
 import requests
 import json
 import base64
 
-key = ''
+key = input("Please enter your VirusTotal API key: ")
 
 def url_scan(url):
 
@@ -21,8 +20,11 @@ def url_scan(url):
     response = requests.get(scan, headers=headers)
     last_analysis_stats = json.loads(response.text)
     print(f"[*] Scanning URL {url}")
-    print("[*] Results:")
-    print(last_analysis_stats["data"]["attributes"]["last_analysis_stats"])
+    try:
+        print("[*] Results:")
+        print(last_analysis_stats["data"]["attributes"]["last_analysis_stats"])
+    except:
+        print("[*] Error generating results.  Please confirm your URL follows this format (including https:// and a trailing / \n https://example.com/")
 
 #attempt uploading a provided file
 def upload_file(file_hash):
@@ -89,14 +91,16 @@ def scan_ip(ip):
     }
 
     response = requests.get(url, headers=headers)
-    print(f"[*] Results:")
     json_resp = json.loads(response.text)
+
+    print(f"[*] Results:")
     print(json_resp["data"]["attributes"]["last_analysis_stats"])
-    print(json_resp["data"]["attributes"]["whois"])
+    print("[*] WHOIS information for the IP:")
+    try:
+        print(json_resp["data"]["attributes"]["whois"])
+    except:
+        print("[*] Error determining WHOIS information, please manually check.")
 
-scan_ip("52.173.83.49")
-
-"""
 #main decision tree
 def main():
 
@@ -110,11 +114,15 @@ def main():
 
     while decision != 'q':
         if decision == '1':
-            view(path)
+            url = input("Please enter the URL: ")
+            url_scan(url)
         elif decision == '2':
-            edit(path)
+            ip = input("Please enter the IP address: ")
+            scan_ip(ip)
+
         elif decision == '3':
-            search(path)
+            hash = input("Please enter the MD5 hash of the file in question: ")
+            file_report(hash)
 
         print('Enter 1 to scan a URL')
         print('Enter 2 to lookup an IP address')
@@ -123,4 +131,3 @@ def main():
         decision = input('What would you like to do next? (Enter q to quit) ')
 
 main()
-"""
