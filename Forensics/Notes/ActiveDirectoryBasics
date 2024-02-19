@@ -70,7 +70,23 @@ As a result of the above, the KDC will send a TGS along with a "Service Session 
 The TGS is encrypted using a key derived from the Service Owner Hash, which is the user or machine account that the service runs under.
 (The TGS contains a copy of the Service Session Key on its encrypted contents so that the Service Owner can access it by decrypting the TGS)
 
-3.)
+3.) The TGS can then be sent to the desired service to authenticate and establish a connection.
+The service will use its configured account's password hash to decrypt the TGS, and validate the Service Session Key
+
+
+
+NetNTLM on the other hand works using a challenge-response mechanism.
+1 - Client sends an auth request to the server they want to access
+2 - The server generates a random number and sends it as a challenge to the client
+3 - The client combines their NTLM has with the challenge to generate a response to the challenge and sends it back to the server for verification
+4 - The server forwards the challenge and the response to the Domain Controller for verification
+5 - The domain controller uses the challenge to recalculate the response and compares it to the original response sent by the client, if they match, the client is authed. (the auth result is sent back to the server)
+6 - The server forwards the authentication result to the client
+
+
+
+If you have multiple domains that share the same namespace, those domains can be joined into a Tree.
+If the theoretical domain "thm.local" was split into two subdomains for different organizational branches, you can have one tree with a root domain of "thm.local" and two subdomains called "sub1.thm.local" and "sub2.thm.local"
 
 
 
