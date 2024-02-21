@@ -87,6 +87,18 @@ NetNTLM on the other hand works using a challenge-response mechanism.
 
 If you have multiple domains that share the same namespace, those domains can be joined into a Tree.
 If the theoretical domain "thm.local" was split into two subdomains for different organizational branches, you can have one tree with a root domain of "thm.local" and two subdomains called "sub1.thm.local" and "sub2.thm.local"
+One consideration to make when talking about trees and forests, is that the "Enterprise Admins" group will grant a user admin privileges over all of an enterprises domains.
+For instance, every domain will still have its respective domain admins, however the enterprise admins have the same relative control in addition to the same level of control in all other domains.
 
+The domains managed can also be configured in different namespaces.  For instance, if one company aquires another and merges, there will likely be different domain trees for each company.
+The union of several trees with different namespaces into the same network is known as a forest.
+
+Domains arranged in trees and forests are joined together by trust relationships.
+Essentially, having a trust relationship between domains allows you to authorize a user from one domain to access resources from another.
+
+The simplest trust relationship is a "one-way", where if domain A trusts domain B, a user on domain B can be authorized to access resources on A.
+(The direction of the one-way trust is contrary to that of access direction)
+
+Two-way trusts allow both domains to mutually authorize users from the other to access resources (this is the default relationship formed)
 
 
