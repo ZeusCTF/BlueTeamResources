@@ -100,5 +100,23 @@ The simplest trust relationship is a "one-way", where if domain A trusts domain 
 (The direction of the one-way trust is contrary to that of access direction)
 
 Two-way trusts allow both domains to mutually authorize users from the other to access resources (this is the default relationship formed)
+---------------
+
+
+Hardening AD
+----------------
+The domain acts as a core unit regarding the logical structure of the Active Directory.  It initially stores all the critical information about the objects that belong to the domain only.
+A Domain Controller is an AD server that acts as the brain for a Windows server domain, essentially supervising the entire network.
+
+Trees and Forests are the two most critical concepts within AD.
+Trees are responsible for sharing resources between the domains, with the communication between domains inside a tree typically being either a one-way or tow-way trust.
+When a domain is added to that tree, it becomes the Offspring domain of that particular domain to which it is added, now a parent domain
+
+When the sharing of the standard global catalogue, directory schema, logical structure, and directory configuration between the collections of trees is made successfully, it is called a Forest.  
+With communication between two forests becoming possible once a forest-level trust is created.
+
+AD trust is the established communication bridge between the domains in Active Directory.
+One domain's resources are not directly available to every other domain, only those that it trusts - essentially meaning resource sharing is goverend by Trusts in AD.
+
 
 
