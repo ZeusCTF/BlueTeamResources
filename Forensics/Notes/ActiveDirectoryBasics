@@ -146,7 +146,21 @@ Shared Accounts (these have limited use-cases)
 An alternative approach is to use a tiered access model, which is composed of numerous technical controls that reduce the privilege escalation risks.
 This model consists of a logical structure of AD that separates AD's assets by creating boundaries for security purposes.  (with the primary goal being to protect tier 0 assets)
 
+Microsoft has a toolkit (Microsoft Security Compliance Toolkit - MSCT) to implement and manage local and domain-level policies.
+This tool provides pre-developed security baselines per the end user environment.
+One useful feature is a policy analyzer that allows for comparisons of group policies to quickly check inconsistencies, redundant settings, and alternations needed to be made between them.  
 
+Some common AD attacks:
 
+Kerberoasting - this is a common post-exploit technique for attackers to get privileged access to AD
+The attacker exploits the TGS to request an encrypted password, and then the attacker cracks it offline.
+These are typically hard to detect as the request comes through an approved user, and no unusual traffic is generated in the process.
+However, this can be prevented by ensuring an additional layer of authentication through MFA or frequent KDC service account password resets.
+
+Weak credentials - not necessarily specific to AD, though just as dangerous in this scenario as in any other.
+The best counter-measure here is to use strong passwords (or passphrases).
+
+Brute Force of RDP - relatively easy to exploit and prevent, in this scenario attackers use scanning tools to brute force weak credentials via the RDP portocol.
+The recommendation here is to never allow public access to RDP.
 
 
