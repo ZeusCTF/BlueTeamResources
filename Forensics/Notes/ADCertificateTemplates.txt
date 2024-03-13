@@ -1,0 +1,9 @@
+Windows AD is not just intended for IAM procedures, but also provides a significant number of services to help you run and manage an organization.  
+Many of these additional services are overlooked by administrators when hardening is performed, with the focus of these notes being on Active Directory Certificate Services (AD CS).
+
+Common applications of certificates include upgrading web traffic to HTTPS, but what about traffic that is internal on an organization's network?
+In this example, do you have to give applications running internally access to the internet to allow them to request a certificate from a trusted CA - the answer is no, thanks to AD CS.
+
+AD CS is Microsoft's PKI implementation.  Since AD provides a level of trust in an organization, it can be used as a CA to prove and delegate trust.  
+AD CS is used for several things such as encrypting files systems, creatnug and verifying digital signatures, and even user auth.
+Particularly interesting is that certificates can survive credential rotation, meaning even if a compromised account's password is reset, that does nothing to invalidate a maliciously generated certificate.
