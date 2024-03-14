@@ -7,3 +7,24 @@ In this example, do you have to give applications running internally access to t
 AD CS is Microsoft's PKI implementation.  Since AD provides a level of trust in an organization, it can be used as a CA to prove and delegate trust.  
 AD CS is used for several things such as encrypting files systems, creatnug and verifying digital signatures, and even user auth.
 Particularly interesting is that certificates can survive credential rotation, meaning even if a compromised account's password is reset, that does nothing to invalidate a maliciously generated certificate.
+
+Since AD CS is such a privileged function, it normally runs on select domain controllers, meaning little interaction occurs directly from normal users.
+That being said, typically an organization will be too large to have an administrator create each certificate manually, which is where certificate templates assist.
+Administrators can create several templates that allow users with the relevant permissions the ability to request a certificate themselves.
+These templates have parameters that say which user can request the certificate and what is required.  - though on an interesting note, many of these parameters can be abused for priv esc and persistent access
+
+Windows has many built-in tools that can be used to enumerate certificate templates and their associated policies.
+The most commonly used of these would be "certutil", if you are on a domain-joined computer and are authticated to the domain, you can execute the following command in a window to enumerate all templates and store them in a file:
+certutil -v -template > cert_templates.txt
+
+This will likely produce a bunch of output that isnt too useful, however you will want to parse this information to see if any "toxic" paramteters have been set.
+These toxic parameters will have the following:
+A template where we have the relevant permissions to request the certificate or where we have an account with those permissions
+A template that allows client authentication, meaning we can use it for Kerberos authentication
+A template that allows us to alter the subject alternative name (SAN)
+
+For the first parameter, we need permissions to generate a certificate request for any exploit to work.
+Essentially we are looking for a template where our user has either the "Allow Enroll" or "Allow Full Control" permission.
+Unfortunately, it's not as simple as grepping for the phrases above, since the certificate template permissions are in most cases assigned to AD groups.
+Instead, you will most likely find groups that have the "Allow Enroll" keyword, and you would then compare tha tlist with your own groups to see if any match.
+(To view your groups, run the "net user *username* /domain" command)
