@@ -28,3 +28,15 @@ Essentially we are looking for a template where our user has either the "Allow E
 Unfortunately, it's not as simple as grepping for the phrases above, since the certificate template permissions are in most cases assigned to AD groups.
 Instead, you will most likely find groups that have the "Allow Enroll" keyword, and you would then compare tha tlist with your own groups to see if any match.
 (To view your groups, run the "net user *username* /domain" command)
+Two groups that are fairly common for certificates include:
+domain users -> which typically means any authenticated users can request the certificate
+domain computers -> which means if an attacker has admin rights over any machine, they can request a certificate on behalf of that machine
+
+For the second parameter, once you have determined the list of certificate templates available to be requested, the next step is to ensure the certificate has the "Client Authentication" EKU.
+This EKU means that the certificate can be used for Kerberos authentication.
+To find these, we need to review the EKU properties of the template and ensure that the words "Client Authentication" is provided.
+
+For the third (and final) parameter, we need to verify that the template allows us, the certificate client, to specify the SAN.  The SAN is usually something like the URL of a website we are looking to encrypt.
+However, if we have the ability to control the SAN, we can leverage the certificate to actually generate a kerberos ticket for any AD account of our choosing.
+
+To find these templates, we grep for the "CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT" property flag that should be set to 1 - which indicates we can specify the SAN ourselves
