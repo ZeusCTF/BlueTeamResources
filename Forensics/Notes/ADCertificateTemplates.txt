@@ -40,3 +40,12 @@ For the third (and final) parameter, we need to verify that the template allows 
 However, if we have the ability to control the SAN, we can leverage the certificate to actually generate a kerberos ticket for any AD account of our choosing.
 
 To find these templates, we grep for the "CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT" property flag that should be set to 1 - which indicates we can specify the SAN ourselves
+
+Assuming that you are in an environment and are able to find an exploitable template, you can generate the certificate request through mmc.
+Select "File > Add/Remove Snap-in, select the Certificates snap-in, expand and right-click "personal" > all tasks > request new certificate.
+
+You should be able to hit next twice, then you are asked to request certificates from a dialog box that says "active directory enrollment policy".
+Within here, there should be an option to input more information instead of choosing one of the defaults.
+In order to ensure that the certificate can be exploited for a Kerberos ticket of a privileged user, the User Principal Name of that user is required.
+This can be found using AD-RSAT tools, or some of the PowerView scripts.
+
