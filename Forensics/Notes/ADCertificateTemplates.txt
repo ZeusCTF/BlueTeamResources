@@ -49,3 +49,13 @@ Within here, there should be an option to input more information instead of choo
 In order to ensure that the certificate can be exploited for a Kerberos ticket of a privileged user, the User Principal Name of that user is required.
 This can be found using AD-RSAT tools, or some of the PowerView scripts.
 
+You will want to target accounts that use Kerberos authentication, which is common for say service accounts.
+To create the cert, you will change the subject name "type" field to "common name", with a value of whatever name you want the cert to have.
+Then, edit the "alternative name" section so that "type" reflects "user principal name" and the value is the UPN of te service account in question.
+
+Once everything has been added, you can enroll the certificate.
+Now that you have the certificate, you can impersonate the user! (probably)
+
+To do so:
+User the certificate to request a Kerberos TGT
+Load this TGT into the hacking platform of choice, one option being Rubeus
