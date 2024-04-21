@@ -57,5 +57,14 @@ Once everything has been added, you can enroll the certificate.
 Now that you have the certificate, you can impersonate the user! (probably)
 
 To do so:
-User the certificate to request a Kerberos TGT
+Use the certificate to request a Kerberos TGT
 Load this TGT into the hacking platform of choice, one option being Rubeus
+
+Once you do the above, you should be able to reset the password for a domain administrator, authenticate to the DC as this user, and then pwn the system!
+
+Some methods exist to mitigate this threat, such as: 
+Reviewing/auditing the existing templates in an organization.
+Requiring admin approval before certificates are issued.
+Updating playbooks as needed.
+
+Further research can be found here: https://posts.specterops.io/certified-pre-owned-d95910965cd2
