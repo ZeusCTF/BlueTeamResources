@@ -1,0 +1,19 @@
+1st nmap scan:
+---------------
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0)
+80/tcp open  http    nginx 1.18.0 (Ubuntu)
+|_http-server-header: nginx/1.18.0 (Ubuntu)
+|_http-title: Did not follow redirect to http://creative.thm
+MAC Address: 02:99:AD:02:85:DB (Unknown)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Hostname is leaked here, adding this to /etc/hosts.
+Looking at the site, nothing too useful is listed here.  We have a list of potential users, and a "components" page.  
+Running a dir scan with gobuster doesn't locate anything new, just an assets directory and the aforementioned components page.
+
+A vhost scan in gobuster does locate a 'beta' subdomain, added this to the hosts file and navigated there to find a "url tester"
+I think it's due to my use of the provided attack box (however I am not certain), but I cannot get this to render valid URLs.
+Regardless, I tested a variety of URLs (known sites, creative.htb, file:///, etc) and found that you can connect on 127.0.0.1, however I had to do so through burp as the page would never finish loading.
+Using this information, we can starting connecting on various ports on localhost to see if there is an internal service (again, I had to use burp's intruder tool instead of a script due to the limitations) to brute force the ports.
+Eventually you find 1337, which shows a directory listing of the server
