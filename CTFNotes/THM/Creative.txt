@@ -17,3 +17,10 @@ I think it's due to my use of the provided attack box (however I am not certain)
 Regardless, I tested a variety of URLs (known sites, creative.htb, file:///, etc) and found that you can connect on 127.0.0.1, however I had to do so through burp as the page would never finish loading.
 Using this information, we can starting connecting on various ports on localhost to see if there is an internal service (again, I had to use burp's intruder tool instead of a script due to the limitations) to brute force the ports.
 Eventually you find 1337, which shows a directory listing of the server
+
+You can manually appended the folder names to the end of the URL to grab the user.txt file, which is what I ended up doing.
+Another file exists called "start_server.py", which appears to be a python script that uses http.server to host pages.
+
+At "/var/www/project/flaskapp.py", we see what I assume is the beta project?  Only because there is a function called "ssrf" and part of the output has "Dead", which I encountered a few times during testing.
+But enough of exploring, this burpsuite interface has lost it's uniqueness for me.
+We can navigate to the /home/saad/.ssh/id_rsa file and copy the user's key, then crack this with john (as it requires a passphrase to use), then we are able to authenticate as the user.
