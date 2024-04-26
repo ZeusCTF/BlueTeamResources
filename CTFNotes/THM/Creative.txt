@@ -24,3 +24,12 @@ Another file exists called "start_server.py", which appears to be a python scrip
 At "/var/www/project/flaskapp.py", we see what I assume is the beta project?  Only because there is a function called "ssrf" and part of the output has "Dead", which I encountered a few times during testing.
 But enough of exploring, this burpsuite interface has lost it's uniqueness for me.
 We can navigate to the /home/saad/.ssh/id_rsa file and copy the user's key, then crack this with john (as it requires a passphrase to use), then we are able to authenticate as the user.
+To note, you do have to use ssh2john to create the crackable hash, then you can use john as you normally would
+
+While I was logged in, I started poking around but was unable to locate anything that really stood out.
+Then I checked the .bash_history file, which I should have checked prior, but I'm used to HTB machines that always have them cleared.
+Regardless, checking this file leaks the saad users password, which I used to run 'sudo -l' and found that this account has permissions to ping as root.
+Not super helpful, but they also have the LD_PRELOAD env variable.  Which I used the below article to run a provided exploit to gain root.
+https://book.hacktricks.xyz/linux-hardening/privilege-escalation
+
+Honestly, I have no idea how this worked, as it initially failed, but by running specifically 'ping' i was given a root shell... so w/e I'll take it.
