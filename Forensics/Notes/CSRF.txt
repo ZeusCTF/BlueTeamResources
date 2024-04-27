@@ -1,0 +1,13 @@
+CSRF is a security vulnerability where an attacker is able to use the victim's browser to perform an unwanted action on an authorized site.
+Typically accomplished through the fact that browsers include all relevant cookies when making a request to a site, which means an attacker could forge requests as the user through their browser.
+This can be done in a number of ways, notably through HTML forms or malicious JavaScript intended to send queries to the targeted app.
+
+There are three phases to a CSRF attack:
+1) the attacker either knows, or must gain an understanding of how the targeted web application formats requests in order to develop a malicious payload
+2) The victim must already be authenticated to the remote site, typically by cookies stored from a prior authenticated session.
+3) Insufficient security measures mean that once a legitimate user clicks on the link, the site is unable to determine the difference between a malicious and legitimate web request.
+
+CSRF attacks have a number of possibilites an attacker can abuse:
+- Unauthorized access -> as an attacker can essentially control a user's actions on a particular site, which will likely have disastorous consequences
+- Explointing trust -> these exploits undermine the trust users have for websites, which can be useful for limting traffic for a competitor or specific site
+- Stealthy exploitation -> this means that CSRF is difficult to detect or realize you have even been victimized, which increases the success rate.
