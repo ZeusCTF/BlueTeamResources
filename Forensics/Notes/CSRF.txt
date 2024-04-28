@@ -27,3 +27,28 @@ For note, malicious flash files typically have an extension of .swf
 Hidden link/image exploitation in CSRF involves an attacker inserting an "invisible" pixel image/link into a site that is almost undetectable by the user (pretty much invisible).
 Typically, the src or href element of the image is set to a destination URL intended to act on the user's behalf without their awareness.
 From a server's prospective, it is imperative that they ensure each request has a unique code such that they can use this to confirm the actions/web requests are legitimate
+
+CSRF tokens are the most common method of preventing this from occuring.
+These tokens are unique, unpredictable values associated with a user's session which ensures the request came from a legitimate source.
+One such implementation is known as the "Double Submit Cookies technique" where a cookie value corresponds to a value in a hidden form field.
+When a server receives the request, it checks that the cookie value matches the form field value.
+
+This works following these general steps:
+1) Whenever a user logs in, the server generates a unique CSRF token.
+This token is sent to the user's browser both as a cookie, and embedded in form fields where actions are taken.
+2) The user then fills out a form to do some action, which includes the token.
+3) Upon submitting the form, two versions of the CSRF token are sent to the server, one in the cookie and the other as the form data.
+4) The server then checks if these tokens match, if so, the request is processed.
+
+
+Despite the apparent effectivness, there are some vulnerabilites that have been exploited by attackers:
+
+1) Session Cookie Hijacking (MitM) is one such vulnerability that occurs when the CSRF token is not appropriately isolated and safeguarded from the session.
+
+2) An attacker may also be able to create a situation in which the browser's same-origin policy is broken.
+
+3) If the site is vulnerabile to cross-site scripting, this may also give an attacker the capability of creating fradulent requests.
+
+4) If the tokens themselves are not generated securely or are predicatable, an attacker may be able to guess their value.
+
+5) An attacker may also be able to inject cookies into a user's browser from a related subdomain.
