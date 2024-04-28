@@ -11,3 +11,19 @@ CSRF attacks have a number of possibilites an attacker can abuse:
 - Unauthorized access -> as an attacker can essentially control a user's actions on a particular site, which will likely have disastorous consequences
 - Explointing trust -> these exploits undermine the trust users have for websites, which can be useful for limting traffic for a competitor or specific site
 - Stealthy exploitation -> this means that CSRF is difficult to detect or realize you have even been victimized, which increases the success rate.
+
+Conventional CSRF attacks frequently concentrate on state-changing actions carried out by submitting forms.
+The victim is tricked into submitting a form without realizing the presence of any associated data.
+The victim's web browser then sends the HTTP request to a web app where the victim is already authenticated, which typically has the vicitim transfer money or change a password, etc.
+
+An asynchoronous CSRF exploitation occurs when operations are initiated without a complete page request-response cycle.  
+This is generally seen with applications that use asynchoronous server communication (XMLHttpRequest or Fetch) and JS to produce more dynamic user interfaces.
+These attacks use asynchoronous calls instead of the more conventional form submissions, however, they still exploit the same trust relationship.
+
+Flash-based CSRF is interesting as it referrs to a CSRF attack that takes advantage of flaws within Adobe Flash Player.
+Flash is no longer supported nowadays, though there are still some systems that utilize Flash components.
+For note, malicious flash files typically have an extension of .swf
+
+Hidden link/image exploitation in CSRF involves an attacker inserting an "invisible" pixel image/link into a site that is almost undetectable by the user (pretty much invisible).
+Typically, the src or href element of the image is set to a destination URL intended to act on the user's behalf without their awareness.
+From a server's prospective, it is imperative that they ensure each request has a unique code such that they can use this to confirm the actions/web requests are legitimate
