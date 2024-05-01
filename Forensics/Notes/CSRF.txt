@@ -58,6 +58,15 @@ SameSite cookies provide a unique defense mechanisim against CSRF attacks.
 These cookies come with a special attribute designed to control when they are sent along cross-site requests.
 Implementing these properly is a reliable protection against CSRF attacks in addition to protecting against xss, etc.
 Depending on the request's context, it can instruct the browser how to transimt cookies, with three potential values existing:
+
 1) Lax - These provide a moderate level of protection by allowing cookies to be sent in top-level navigations and safe HTTP methods (GET, HEAD, OPTIONS).
 This means the cookies will not be sent with cross-origin POST requests, which helps to prevent certain types of CSRF attacks.
 However, cookies are still included in GET requests initiated by external sites, which could pose a security risk if sensitive information is stored in the cookies.
+
+2) Strict - These offer the highest level of protection by restricting cookies to be sent only in a first-party context.
+This means that cookies are only sent with requests originating from the same site that set the cookie, preventing csrf attacks.
+
+3) None - These are sent with both first-party and cross-site requests, making them convenient for scenarios where cookies need to be accessible acroos different origins.
+However, to prevent potential security risks associated with cross-site requests, None SameSite cookies require the Secure attribute if the request is made over HTTPS.
+This ensures the cookies are only transmitted over secure connections.
+
