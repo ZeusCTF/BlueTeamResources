@@ -1,0 +1,10 @@
+Serialization is the process of transforming an object's state into a human-readable or binary format that can be stored or transmitted and reconstructed as and when required.
+This is necessary in applications where data must be transferred between different parts of a system or across a network.
+
+Deserialization is essentially the opposite, where you take the formatted data and convert it back into an object.
+
+There have been multiple instances of insecure deserialization causing major security issues, such as Log4j or the WebLogic RCE.
+
+Different programming languages implement serialization, howevever while the logic is essentially the same, the functionality typically differs in name.
+In PHP, serialization is accomplished with the serialize() function, which converts a PHP object or array into a byte stream representing the object's data and structure.
+This resulting stream can include various daata types, such as arrays or objects (etc), making it unique.
