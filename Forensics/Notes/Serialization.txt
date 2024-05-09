@@ -7,4 +7,11 @@ There have been multiple instances of insecure deserialization causing major sec
 
 Different programming languages implement serialization, howevever while the logic is essentially the same, the functionality typically differs in name.
 In PHP, serialization is accomplished with the serialize() function, which converts a PHP object or array into a byte stream representing the object's data and structure.
-This resulting stream can include various daata types, such as arrays or objects (etc), making it unique.
+This resulting stream can include various data types, such as arrays or objects (etc), making it unique.
+An example of the result of a PHP serialize() can be as follows: O:5:"Notes":1:{s:7:"content";s:11:"Hello World";}
+With the 0:5:"Notes":1: portion indicating that this data represents an object of class Notes, with one property
+s:7:"content" represents the property "content" with a length of 7 chars.  (workth noting, in serialized data, strings are represented with an s, followed by the string length - integers by i)
+s:11:"Hello world" is the value of the content property
+
+Python on the other hand uses the "Pickle" module to serialize and deserialize objects.
+Of note here, "pickled" data will be converted into binary format, which can result in issues with transmission across certain mediums, which therefore prompts many developers to base64 encode this binary data before transmission.
