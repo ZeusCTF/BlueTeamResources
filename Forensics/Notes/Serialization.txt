@@ -24,4 +24,11 @@ Cookies are often used to store serialized data for web applications, and if the
 Some of the more common vulnerabilities involving improper serialization stem from applications trusting data set within serialized cookies (which can be modified by an attacker).
 
 Other explotation methods do exist, such as "object injection" which arises from insecure data deserialization in web applications.
-This typicall occurrs when untrusted data is deserialized into an object, which allows attackers to manipulate the serialized data to execute code.
+This typically occurrs when untrusted data is deserialized into an object, which allows attackers to manipulate the serialized data to execute code.
+By crafting a malicious serialized object with a specially crafted __wakeup() or __destruct() method, attackers could potentiall gain RCE.
+
+A couple of relevant tools exist to automate the testing process, with those being: Ysoserial (Java) and PHP Gadget Chain (PHP) - though many others exist
+PHPGGC is interesting as it provides a library of gadget chains for various PHP frameworks designed to exploit specific vulnerabilities.
+
+Mitigating the risks associated with insecure deserialization is vital in ensuring the security of a web application.
+To detect these threats, an organization must dedicate resources towards avoiding insecure serialization formats, avoiding unnecessary eval() function usage, and the implementation of proper input validation and output encoding.
