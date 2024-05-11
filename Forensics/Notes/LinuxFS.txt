@@ -1,0 +1,6 @@
+When investigating a potentially compromised host, you will want to ensure that only known-good binaries are used.
+This can be achieved by mounting an external drive that contains all of the necessary binaries to the suspicious machine.
+Upon mounting the drive, add the mount point to the PATH variable so those binaries are used instead.
+
+Common directories for abuse include: /tmp, /var/tmp, /dev/shm due to their unqiue properties of typically being writable by any user
+Somewhat related, but this command will look for all files owned by a particular group: find / -group GROUPNAME 2>/dev/null
