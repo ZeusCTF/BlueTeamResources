@@ -4,3 +4,27 @@ Upon mounting the drive, add the mount point to the PATH variable so those binar
 
 Common directories for abuse include: /tmp, /var/tmp, /dev/shm due to their unqiue properties of typically being writable by any user
 Somewhat related, but this command will look for all files owned by a particular group: find / -group GROUPNAME 2>/dev/null
+
+All files have Metadata, which is essentially embedded information that describes the file itself.
+This includes information such as the create date, attributes, file type, author, etc.
+Timestamps are a unique attribute as they are potentially the most useful for any type of analysis.
+File create, modification, and access times often aid investigators in establishing a timeline of events.
+
+On a Unix system, there are three main timestamps that get recorded:
+1) Modify timestamp (mtime) - this reflects the last time the contents of a file were modified or altered.
+"ls -l"
+
+
+2) Change timestamp (ctime) - this timestamp indicates the last time a file's metadata was changed.
+This includes things like permissions, ownership, filename, etc.
+"ls -lc"
+
+
+3) Access timestamp (atime) - this indicates the last time a file was accessed or read.
+"ls -lu"
+
+(or you can use "stat" to see all attributes at once)
+
+On Unix systems, /etc/ is a special directory that stores configuration files and system-wide settings.
+Included in this, is the /etc/passwd/ file, which contains a list of the system's accounts and their attributes.
+One common persistance technique is to create a "secret" root user that the attack can later use.
