@@ -28,3 +28,21 @@ This includes things like permissions, ownership, filename, etc.
 On Unix systems, /etc/ is a special directory that stores configuration files and system-wide settings.
 Included in this, is the /etc/passwd/ file, which contains a list of the system's accounts and their attributes.
 One common persistance technique is to create a "secret" root user that the attack can later use.
+
+Another trival persistance technique is to use groups, in particular a certain set of groups that grant elevated privileges (though theoretically any group might have some use to an attacker):
+1) Sudo/wheel - for obvious reasons, members of this group have the authority to execute commands as an elevated user, making it extremely valuable for attackers
+2) adm - this group typically has read access to system log files, which can expose sensitive information
+3) shadow - this group is generally used for managing user authentication and password information, with the specific capability of reading the /etc/shadow file and reading password hashes
+4) disk - this group allows members to have nearly unrestricted read access with some write access in the system
+
+All system groups are contained within the /etc/groups file.
+If you need to know the groups a specific user has, run the "groups <user>" command
+If you instead want to view the members of a specific group, run "getent group <groupname>"
+
+Some other useful files are the /var/log/wtmp, which is used by the "last" command, which when run displays the history of the last logged-in users
+Similarly, "lastb" tracks failed login attempts, which are read from the /var/log/btmp file
+"lastlog" focuses on a user's most recent login activity read from the /var/log/lastlog file
+
+"who" is useful for determining which users are currently logged in to the system
+
+the /etc/sudoers file determines which users posses sudo privileges, which makes it invaluable for attackers
