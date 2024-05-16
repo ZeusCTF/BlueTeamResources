@@ -46,3 +46,11 @@ Similarly, "lastb" tracks failed login attempts, which are read from the /var/lo
 "who" is useful for determining which users are currently logged in to the system
 
 the /etc/sudoers file determines which users posses sudo privileges, which makes it invaluable for attackers
+
+With regards to user accounts, the .ssh/authorized_keys file will contain the public keys that are allowed to SSH into the machine, which is a fairly common persistance technique
+Kind've unrelated, but as it's common in CTFs I'll include a brief overview:
+1) Use ssh-keygen to generate a private/public key pair on the client machine
+2) copy the public key (id_rsa.pub) into the authorized_keys file
+3) you will likely have to adjust the permissions on the private key to 600
+4) then you should be able to connect to the machine via the private key
+
