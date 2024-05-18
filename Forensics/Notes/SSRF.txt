@@ -1,0 +1,14 @@
+In general, an SSRF vulnerability occurs when user-provided data is used to construct a request (such as forming a URL).
+To execute an SSRF attack, an attacker can manipulate a parameter value within the software to effectively create or control requests coming from that software.
+
+The most basic scenario in which this can be demonstrated is in the case of an attacker being able to make requests to the server hosting the web app.
+This can be achieved by submitting the loopback address in requests, or by providing "localhost" in queries.
+For example, imagine a web app that loads additional pages based upon a URL parameter "example.com?url=localhost/index".
+You could potentially adjust the "index" portion of this URL to reference other internal pages on the server, like /config etc.
+
+A more complicated scenario includes applications in which multiple servers are utilized in their environment.
+This might be something like a front-end web server is interacting with back-end databases servers or something similar.
+Generally, these servers are hosted on private IPs, meaning that there is no direct access from the internet to thes machines.
+However, an attacker may be able to supply internal addresses in their web requests, enabling them the communicate with these servers through the web application.
+Similar to the above attack, you would need to adjust the "localhost" or loopback address to reference the other internal servers.
+
