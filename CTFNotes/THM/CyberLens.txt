@@ -122,3 +122,5 @@ Apache Tika-server < 1.18 - Command Injection            | windows/remote/46540.
 Though the 2nd looks like it'll be easier to use...
 
 Setup msf to look for this exploit, set the options, ran it, got a shell, and got User.txt!
+------------------------
+To progress futher, you just need to use the generic metasploit "multi/recon/local_exploit_suggester" and run the first choice

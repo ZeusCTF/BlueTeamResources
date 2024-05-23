@@ -6,6 +6,13 @@ This can be achieved by submitting the loopback address in requests, or by provi
 For example, imagine a web app that loads additional pages based upon a URL parameter "example.com?url=localhost/index".
 You could potentially adjust the "index" portion of this URL to reference other internal pages on the server, like /config etc.
 
+Another example may be the following:
+Say a request is being made to the following endpoint via a frontend API request: stockApi=http://stock.shoppers.net:8000/check_stock
+
+
+
+
+
 A more complicated scenario includes applications in which multiple servers are utilized in their environment.
 This might be something like a front-end web server is interacting with back-end databases servers or something similar.
 Generally, these servers are hosted on private IPs, meaning that there is no direct access from the internet to thes machines.
