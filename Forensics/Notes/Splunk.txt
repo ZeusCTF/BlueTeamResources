@@ -1,0 +1,1 @@
+Splunk apps are defined by an Administrator
