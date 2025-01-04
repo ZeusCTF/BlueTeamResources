@@ -1,1 +1,17 @@
-Splunk apps are defined by an Administrator
+Splunk apps are defined by an Administrator, or user with an admin role.
+Three main roles exist in Splunk:
+1) Admin - can install apps, injust data, create knowledge objects
+2) Power - Can create and share knowledge objects for users of an app and do realtime searches
+3) User - Will only see their own knowledge objects and those shared with them
+
+On the data summary tab/section, the Sourcetypes field refers to classifications of data, Sources are the network ports or files (etc) that data is coming from, and Hosts are the machines data is pulled from
+
+Three search modes exist:
+1) Fast - Cuts down on field info returned
+2) Smart - toggles behavior based on search ran
+3) Verbose - returns as much event data and fields possible
+
+When a search is run, "events" are returned.  Within these events, the text we searched for will be highlighted, with the events returned in a reverse chronological order (newest first)
+Time is normalized in the index to a consistent format, the timestamp you see in the event is based on what you set in your account (this would be the time reflected on the far left)
+
+(search processing language)
